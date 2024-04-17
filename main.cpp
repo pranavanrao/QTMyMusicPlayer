@@ -15,20 +15,22 @@ int main(int argc, char *argv[])
     QSlider slider;
     QProgressBar bar;
 
+    slider.setRange(0,100);
+
     layout.addWidget(&slider);
     layout.addWidget(&bar);
 
     w.show();
 
-    QObject::connect(&slider,
-                     &QSlider::valueChanged,
-                     &bar,
-                     &QProgressBar::setValue);
+    // QObject::connect(&slider,
+    //                  &QSlider::valueChanged,
+    //                  &bar,
+    //                  &QProgressBar::setValue);
 
     QObject::connect(&slider,
-                     SIGNAL(QSlider::sliderMoved(int)),
+                     SIGNAL(sliderMoved(int)),
                      &bar,
-                     SLOT(&QProgressBar::setValue));
+                     SLOT(setValue(int)));
 
     return a.exec();
 }
