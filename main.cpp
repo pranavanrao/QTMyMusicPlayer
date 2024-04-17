@@ -28,6 +28,11 @@ int main(int argc, char *argv[])
     //                  &QProgressBar::setValue);
 
     QObject::connect(&slider,
+                     &QSlider::sliderMoved,
+                     &w,
+                     &Widget::valueReceived);
+
+    QObject::connect(&slider,
                      SIGNAL(sliderMoved(int)),
                      &bar,
                      SLOT(setValue(int)));
