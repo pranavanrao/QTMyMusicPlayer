@@ -1,5 +1,6 @@
 #ifndef WIDGET_H
 #define WIDGET_H
+#include <mybosswidget.h>
 
 #include <QWidget>
 
@@ -17,10 +18,14 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
+signals:
+    void ready(bool);
+
 public slots:
     void valueReceived(int);
+    void playerStarted(bool val);
 
 private:
-    Ui::Widget *ui;
+    MyBossWidget *m_bPlayer;
 };
 #endif // WIDGET_H

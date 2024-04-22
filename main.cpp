@@ -5,6 +5,8 @@
 #include <QSlider>
 #include <QProgressBar>
 #include <QObject>
+#include <QLabel>
+#include <QString>
 
 int main(int argc, char *argv[])
 {
@@ -12,13 +14,16 @@ int main(int argc, char *argv[])
     Widget w;
 
     QVBoxLayout layout(&w);
-    QSlider slider;
+    QSlider slider(Qt::Horizontal);
     QProgressBar bar;
+    QLabel text;
 
     slider.setRange(0,100);
+    slider.setDisabled(true);
 
     layout.addWidget(&slider);
     layout.addWidget(&bar);
+    layout.addWidget(&text);
 
     w.show();
 
@@ -31,6 +36,17 @@ int main(int argc, char *argv[])
                      &QSlider::sliderMoved,
                      &w,
                      &Widget::valueReceived);
+
+    QObject::connect(&w,
+                     &Widget::ready,
+                     &slider,
+                     &QSlider::setEnabled);
+
+    QObject::connect(&slider,
+                     &QSlider::valueChanged,
+                     [&text](int value) {
+                         text.setText("Slider value = " + QString::number(value));
+                     });
 
     QObject::connect(&slider,
                      SIGNAL(sliderMoved(int)),

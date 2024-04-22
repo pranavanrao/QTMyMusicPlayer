@@ -10,9 +10,11 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
+    mybosswidget.cpp \
     widget.cpp
 
 HEADERS += \
+    mybosswidget.h \
     widget.h
 
 FORMS += \
